@@ -49,7 +49,7 @@ jobs:
     inputs:
       SonarCloud: SonarCloud
       organization: amoreno00
-      projectKey: WebAppWithDatabaseDemo
+      projectKey: firstorg
   
   - task: DotNetCoreCLI@2
     displayName: Build
