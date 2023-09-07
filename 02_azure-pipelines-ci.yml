@@ -47,7 +47,7 @@ jobs:
   - task: SonarCloudPrepare@1
     displayName: 'Prepare analysis on SonarCloud'
     inputs:
-      SonarCloud: SonarCloud
+      SonarCloud: sonarcloud-connection
       organization: amoreno00
       projectKey: firstorg
   
