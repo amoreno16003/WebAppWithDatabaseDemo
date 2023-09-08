@@ -78,7 +78,7 @@ stages:
       inputs:
         SonarCloud: sonarcloud-connection
         organization: amoreno00
-        projectKey: WebAppWithDatabaseDemo
+        projectKey: amoreno00_firstorg
 
     - task: DotNetCoreCLI@2
       displayName: Build WebApp
