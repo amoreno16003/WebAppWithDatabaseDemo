@@ -76,7 +76,7 @@ stages:
       displayName: Prepare analysis on SonarCloud
       enabled: ${{ parameters.runCompletePipeline }}
       inputs:
-        SonarCloud: SonarCloud
+        SonarCloud: sonarcloud-connection
         organization: amoreno00
         projectKey: WebAppWithDatabaseDemo
 
