@@ -176,7 +176,7 @@ stages:
   displayName: Create & Deploy to Dev
   dependsOn: Build_Stage
   variables:
-    azureSubscription: 'Azure subscription 1(bc7c051a-c439-4898-b227-d199d6240d8e)' # couldn't be referenced
+    azureSubscription: 'azuresub' # couldn't be referenced
     ResourceGroupName: '$(Prefix)-$(Release.EnvironmentName)-$(UniqueId)-RG'
     Database.Admin: 'houssem'
     Database.Password: '@Aa123456' # to be secured in Key Vault
@@ -207,7 +207,7 @@ stages:
       displayName: Validate ARM templates
       enabled: ${{ parameters.runCompletePipeline }}
       inputs:
-        azureSubscription: 'Azure subscription 1(bc7c051a-c439-4898-b227-d199d6240d8e)'
+        azureSubscription: 'azuresub'
         action: 'Create Or Update Resource Group'
         resourceGroupName: '$(ResourceGroupName)'
         location: 'West Europe'
@@ -249,7 +249,7 @@ stages:
       displayName: Preview Template Changes (What-If)
       inputs:
         workingDirectory: $(System.DefaultWorkingDirectory)/arm/
-        azureSubscription: 'Azure subscription 1(bc7c051a-c439-4898-b227-d199d6240d8e)'
+        azureSubscription: 'azuresub'
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: 'az deployment group what-if --resource-group $(ResourceGroupName) --name rollout01 --template-file  WebSiteSQLDatabase.json --parameters WebSiteSQLDatabase.parameters.json'
@@ -259,7 +259,7 @@ stages:
       displayName: Deploy ARM templates
       inputs:
         deploymentScope: 'Resource Group'
-        azureResourceManagerConnection: 'Azure subscription 1(bc7c051a-c439-4898-b227-d199d6240d8e)'
+        azureResourceManagerConnection: 'azuresub'
         subscriptionId: 'bc7c051a-c439-4898-b227-d199d6240d8e'
         action: 'Create Or Update Resource Group'
         resourceGroupName: '$(ResourceGroupName)'
@@ -275,7 +275,7 @@ stages:
       enabled: ${{ parameters.runCompletePipeline }}
       continueOnError: true
       inputs:
-        ConnectedServiceNameARM: 'Azure subscription 1(bc7c051a-c439-4898-b227-d199d6240d8e)'
+        ConnectedServiceNameARM: 'azuresub'
         GenerateMethodParameterSetSelection: 'ResourceGroupName'
         ResourceGroupName: '$(ResourceGroupName)'
         SubscriptionId: 'bc7c051a-c439-4898-b227-d199d6240d8e'
@@ -302,7 +302,7 @@ stages:
     - task: AzureRmWebAppDeployment@3
       displayName: Deploy WebApp to Azure
       inputs:
-        azureSubscription: 'Azure subscription 1(bc7c051a-c439-4898-b227-d199d6240d8e)'
+        azureSubscription: 'azuresub'
         appType: 'app'
         WebAppName: '$(WebAppName)'
         Package: '$(System.DefaultWorkingDirectory)/drop/WebApp.zip'
@@ -321,7 +321,7 @@ stages:
     - task: SqlAzureDacpacDeployment@1
       displayName: Deploy DacPac to SQL Azure
       inputs:
-        azureSubscription: 'Azure subscription 1(bc7c051a-c439-4898-b227-d199d6240d8e)'
+        azureSubscription: 'azuresub'
         AuthenticationType: 'server'
         ServerName: '$(SqlServerName).database.windows.net,1433'
         DatabaseName: '$(Database.Name)'
